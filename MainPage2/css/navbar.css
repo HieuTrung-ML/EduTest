@@ -149,6 +149,7 @@
    SCROLLED STATE
    ============================================= */
 
+.frame-header.is-glass,
 .frame-header.scrolled {
   background: rgba(245, 248, 252, 0.38) !important;
   backdrop-filter: blur(12px) saturate(112%) !important;
@@ -368,6 +369,10 @@
   min-height: 76px !important;
   padding-top: 10px !important;
   padding-bottom: 10px !important;
+}
+
+#main-nav.frame-header.is-glass,
+#main-nav.frame-header.scrolled {
   background: rgba(245, 248, 252, 0.38) !important;
   backdrop-filter: blur(12px) saturate(112%) !important;
   -webkit-backdrop-filter: blur(12px) saturate(112%) !important;

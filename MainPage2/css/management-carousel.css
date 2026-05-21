@@ -20,7 +20,7 @@
 .integrate-school {
   width: 100%;
   background: linear-gradient(307deg, #0D3676 0%, #010D40 100%);
-  padding: 60px 0 50px;
+  padding: 160px 0 200px 0 !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -291,7 +291,6 @@
 .integrate-school {
   position: relative !important;
   min-height: 720px !important;
-  padding-bottom: 90px !important; /* Make room for absolute positioned dots at bottom */
 }
 
 /* Carousel wrapper for centering viewport and positioning absolute arrows */
@@ -365,7 +364,7 @@
 /* Pinned dots row at bottom center of the section */
 .mng-dots {
   position: absolute !important;
-  bottom: 32px !important;
+  bottom: -48px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
   z-index: 10 !important;

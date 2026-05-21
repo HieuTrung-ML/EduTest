@@ -22,7 +22,7 @@
   align-self: stretch;
   display: flex;
   align-items: flex-start;
-  gap: 44px;
+  gap: 45px;
   max-width: 100%;
 }
 
@@ -42,6 +42,7 @@
   font-size: var(--fs-24);
   color: var(--color-royalblue-100);
   font-family: var(--font-lato);
+  flex: 1 1 0;
 }
 
 .detail-container-parent {
@@ -88,7 +89,6 @@
 
 .cc-gi-gii {
   margin: 0;
-  width: 490px;
   position: relative;
   font-size: var(--fs-60);
   line-height: 150%;
@@ -136,6 +136,7 @@
   gap: var(--gap-30);
   min-width: 666px;
   max-width: 100%;
+  flex: 1.2 1 0;
 }
 
 .header-container,

@@ -1,26 +1,51 @@
 import { $ } from './utils.js';
 
 /**
- * Handles navbar scrolled threshold behavior
+ * Handles navbar two-step scroll behavior:
+ * - any scroll: glass background
+ * - past the .frame-wrapper3 section: dark text and logo swap
  */
 export function initNavbar() {
   const mainNav = $('#main-nav');
+  const colorSwitchSection = $('.frame-parent');
   
   // Move navbar to body to fix z-index overlay issues
   if (mainNav && mainNav.parentNode !== document.body) {
     document.body.insertBefore(mainNav, document.body.firstChild);
   }
   
-  // Change background only when scrolling past the hero section
-  const scrollThreshold = 50;
-
   if (mainNav) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > scrollThreshold) {
-        mainNav.classList.add('scrolled');
-      } else {
-        mainNav.classList.remove('scrolled');
+    let colorSwitchThreshold = Number.POSITIVE_INFINITY;
+
+    const refreshColorSwitchThreshold = () => {
+      if (!colorSwitchSection) {
+        colorSwitchThreshold = Number.POSITIVE_INFINITY;
+        return;
       }
+
+      const sectionRect = colorSwitchSection.getBoundingClientRect();
+      colorSwitchThreshold = Math.ceil(
+        sectionRect.top + window.scrollY + sectionRect.height
+      );
+    };
+
+    const updateNavbarState = () => {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+
+      mainNav.classList.toggle('is-glass', scrollY > 0);
+      mainNav.classList.toggle('scrolled', scrollY > colorSwitchThreshold);
+    };
+
+    refreshColorSwitchThreshold();
+    updateNavbarState();
+    window.addEventListener('scroll', updateNavbarState, { passive: true });
+    window.addEventListener('resize', () => {
+      refreshColorSwitchThreshold();
+      updateNavbarState();
+    });
+    window.addEventListener('load', () => {
+      refreshColorSwitchThreshold();
+      updateNavbarState();
     });
   }
 }

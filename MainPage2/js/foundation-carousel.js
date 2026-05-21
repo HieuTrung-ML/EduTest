@@ -31,7 +31,7 @@ export function initFoundationCarousel() {
       {
         title: "Mở rộng không hạn chế",
         desc: "Liên kết chặt chẽ giữa các module, tính năng cập nhật được và cải tiến liên tục giúp trải nghiệm thông suốt",
-        img: "./public/protected 1.svg"
+        img: "./public/protected 1.png"
       }
     ];
     
