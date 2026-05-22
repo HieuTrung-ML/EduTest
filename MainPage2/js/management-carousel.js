@@ -4,18 +4,18 @@ import { $, $$ } from './utils.js';
  * Handles the management carousel large scale scaling and navigation.
  */
 export function initManagementCarousel() {
-  const mngTrack      = $('#management-track');
-  const mngPrev       = $('#management-prev');
-  const mngNext       = $('#management-next');
-  const mngDotsCont   = $('#management-dots');
-  const mngViewport   = $('#management-slider');
+  const mngTrack = $('#management-track');
+  const mngPrev = $('#management-prev');
+  const mngNext = $('#management-next');
+  const mngDotsCont = $('#management-dots');
+  const mngViewport = $('#management-slider');
 
   if (mngTrack && mngPrev && mngNext && mngDotsCont && mngViewport) {
-    const mngSlides    = $$( '.mng-slide', mngTrack);
-    const mngScalers   = $$( '.mng-card-scaler', mngTrack);
-    const totalSlides  = mngSlides.length;
-    let   currentSlide = 0;
-    let   autoSlideInterval;
+    const mngSlides = $$('.mng-slide', mngTrack);
+    const mngScalers = $$('.mng-card-scaler', mngTrack);
+    const totalSlides = mngSlides.length;
+    let currentSlide = 0;
+    let autoSlideInterval;
 
     // ── Scale each 1530×800 scaler to fit the viewport ──
     const applyScale = () => {
@@ -35,7 +35,7 @@ export function initManagementCarousel() {
     };
 
     applyScale();
-    
+
     // Size tracking using ResizeObserver
     if (window.ResizeObserver) {
       const observer = new ResizeObserver(() => {
@@ -55,12 +55,13 @@ export function initManagementCarousel() {
       dot.addEventListener('click', () => goTo(i));
       mngDotsCont.appendChild(dot);
     });
-    const dots = $$( '.mng-dot', mngDotsCont);
+    const dots = $$('.mng-dot', mngDotsCont);
 
     // ── Navigate to slide ──
     const goTo = (index) => {
       currentSlide = (index + totalSlides) % totalSlides;
-      
+      sessionStorage.setItem('managementCarouselSlide', currentSlide);
+
       // Update slide active class for opacity transition
       mngSlides.forEach((slide, i) => {
         if (i === currentSlide) {
@@ -97,7 +98,9 @@ export function initManagementCarousel() {
     mngNext.addEventListener('click', () => goTo(currentSlide + 1));
 
     // ── Init ──
-    goTo(0);
+    const savedSlide = sessionStorage.getItem('managementCarouselSlide');
+    const initialSlide = savedSlide ? parseInt(savedSlide, 10) : 0;
+    goTo(initialSlide);
     startAutoSlide();
   }
 }

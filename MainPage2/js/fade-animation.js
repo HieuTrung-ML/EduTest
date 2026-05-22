@@ -30,7 +30,7 @@ export function initFadeAnimation() {
   // Elements that just fade up
   const fadeUpSelectors = [
     'h1', 'h2', 'h3',
-    '.h-tr-nh', '.t-ng-ha', '.c-thit-k', '.gii-php-qun', '.khng-ch-l', '.khng-ch-l2',
+    '.h-tr-nh', '.t-ng-ha', '.c-thit-k', '.gii-php-qun',
     '.header-block'
   ];
   
@@ -40,6 +40,9 @@ export function initFadeAnimation() {
     
     // Exclude hero right circle elements from fading
     if (el.closest('.vector-parent')) return;
+
+    // Exclude background-1-parent (the Management Carousel banner) and main-services from fading
+    if (el.closest('.background-1-parent') || el.closest('.main-services')) return;
     
     // Only add if it's not already handled by stagger or left/right
     if (!el.classList.contains('fade-up') && !el.classList.contains('fade-left') && !el.classList.contains('fade-right')) {
